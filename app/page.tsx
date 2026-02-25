@@ -1,182 +1,101 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-
-const slides = [
-  {
-    title: "🎮 Pixel Art Indie Games",
-    subtitle: "Your destination for the best indie games!",
-    bg: "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)"
-  },
-  {
-    title: "🏆 Game Reviews",
-    subtitle: "Honest reviews & recommendations",
-    bg: "linear-gradient(135deg, #0f3460 0%, #1a1a2e 50%, #16213e 100%)"
-  },
-  {
-    title: "🎬 Let's Plays",
-    subtitle: "Join the adventure!",
-    bg: "linear-gradient(135deg, #16213e 0%, #0f3460 50%, #1a1a2e 100%)"
-  }
-]
+import './page.css'
 
 export default function Home() {
-  const [currentSlide, setCurrentSlide] = useState(0)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length)
-    }, 4000)
-    return () => clearInterval(timer)
+    setMounted(true)
   }, [])
 
   const links = [
-    { name: 'YouTube', url: 'https://www.youtube.com/@Chochklah', icon: '▶️', color: '#FF0000' },
-    { name: 'X', url: 'https://x.com/ChochKlah', icon: '𝕏', color: '#1DA1F2' },
-    { name: 'Instagram', url: 'https://www.instagram.com/chochklah/', icon: '📸', color: '#E4405F' },
+    {
+      name: 'YouTube', url: 'https://www.youtube.com/@Chochklah', bg: '#FF0000',
+      svg: <svg viewBox="0 0 24 24" fill="white" width="24" height="24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+    },
+    {
+      name: 'X', url: 'https://x.com/ChochKlah', bg: '#000000',
+      svg: <svg viewBox="0 0 24 24" fill="white" width="22" height="22"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+    },
+    {
+      name: 'Instagram', url: 'https://www.instagram.com/chochklah/', bg: '#E4405F',
+      svg: <svg viewBox="0 0 24 24" fill="white" width="22" height="22"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+    },
   ]
 
   return (
-    <main style={{
-      minHeight: '100vh',
-      background: slides[currentSlide].bg,
-      color: 'white',
-      fontFamily: "'Courier New', monospace",
-      transition: 'background 1s ease',
-      overflow: 'hidden'
-    }}>
+    <main className="hero-main">
       {/* Animated Background Stars */}
-      <div style={{ position: 'fixed', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
-        {[...Array(50)].map((_, i) => (
-          <div key={i} style={{
-            position: 'absolute',
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            width: `${Math.random() * 3 + 1}px`,
-            height: `${Math.random() * 3 + 1}px`,
-            background: 'white',
-            borderRadius: '50%',
-            animation: `twinkle ${Math.random() * 3 + 2}s infinite`
-          }} />
-        ))}
-      </div>
+      {mounted && (
+        <div style={{ position: 'fixed', inset: 0, overflow: 'hidden', pointerEvents: 'none', zIndex: 0 }}>
+          {[...Array(60)].map((_, i) => (
+            <div key={i} style={{
+              position: 'absolute',
+              left: `${(i * 37 + 13) % 100}%`,
+              top: `${(i * 53 + 7) % 100}%`,
+              width: `${(i % 3) + 1}px`,
+              height: `${(i % 3) + 1}px`,
+              background: 'white',
+              borderRadius: '50%',
+              opacity: 0.4,
+              animation: `twinkle ${2 + (i % 3)}s infinite`,
+              animationDelay: `${(i * 0.15) % 3}s`
+            }} />
+          ))}
+        </div>
+      )}
 
-      {/* Slide Indicator */}
-      <div style={{ position: 'fixed', bottom: '20px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '8px', zIndex: 10 }}>
-        {slides.map((_, i) => (
-          <div key={i} style={{
-            width: i === currentSlide ? '24px' : '8px',
-            height: '8px',
-            borderRadius: '4px',
-            background: i === currentSlide ? '#feca57' : 'rgba(255,255,255,0.3)',
-            transition: 'all 0.3s ease'
-          }} />
-        ))}
-      </div>
+      {/* Hero Layout */}
+      <div className="hero-layout">
 
-      <div style={{ 
-        maxWidth: '600px', 
-        margin: '0 auto', 
-        padding: '2rem 1rem',
-        position: 'relative',
-        zIndex: 1
-      }}>
-        
-        {/* Banner - Full Width */}
-        <div style={{
-          width: '100vw',
-          marginLeft: 'calc(-50vw + 50%)',
-          height: '340px',
-          overflow: 'hidden',
-          marginBottom: '60px',
-          boxShadow: '0 10px 40px rgba(0,0,0,0.5)'
-        }}>
-          <img 
-            src="/banner.jpg" 
-            alt="ChochKlah"
-            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
+        {/* Left: Character Image */}
+        <div className="hero-image-wrap">
+          <img
+            src="/Choch.png"
+            alt="Choch"
+            className="hero-image"
           />
         </div>
 
-        {/* Animated Title */}
-        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <h1 style={{ 
-            fontSize: '2.5rem', 
-            marginBottom: '0.5rem',
-            textShadow: '0 0 20px rgba(254,202,87,0.5)',
-            animation: 'pulse 2s infinite'
-          }}>
-            {slides[currentSlide].title}
-          </h1>
-          <p style={{ color: '#a0a0a0', fontSize: '1.1rem' }}>
-            {slides[currentSlide].subtitle}
+        {/* Right: Content */}
+        <div className="hero-content">
+          <h1 className="hero-title">ChochKlah</h1>
+
+          <p className="hero-role">Content Creator / Gamer</p>
+
+          <p className="hero-desc">
+            Pixel art indie games, honest reviews, and let&apos;s plays.
+            Join me for the adventure — new videos every week!
           </p>
-        </div>
 
-        {/* Links */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem', marginBottom: '2rem' }}>
-          {links.map((link) => (
+          {/* Social Links */}
+          <div className="hero-links">
+            {links.map((link) => (
+              <a
+                key={link.name}
+                href={link.url}
+                target="_blank"
+                title={link.name}
+                className="icon-btn"
+                style={{ background: link.bg, boxShadow: `0 4px 20px ${link.bg}66` }}
+              >
+                {link.svg}
+              </a>
+            ))}
             <a
-              key={link.name}
-              href={link.url}
-              target="_blank"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '0.5rem',
-                padding: '1.25rem',
-                background: `${link.color}22`,
-                borderRadius: '16px',
-                border: `2px solid ${link.color}44`,
-                textDecoration: 'none',
-                color: 'white',
-                fontWeight: 'bold',
-                fontSize: '1rem',
-                transition: 'all 0.3s ease'
-              }}
+              href="/contact"
+              title="Contact"
+              className="icon-btn"
+              style={{ background: '#555', boxShadow: '0 4px 20px rgba(85,85,85,0.4)' }}
             >
-              <span style={{ fontSize: '1.5rem' }}>{link.icon}</span>
-              {link.name}
+              <svg viewBox="0 0 24 24" fill="white" width="22" height="22"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
             </a>
-          ))}
+          </div>
+
+          <p className="hero-footer">© 2026 ChochKlah. All rights reserved.</p>
         </div>
-
-        {/* CTA Button */}
-        <a
-          href="/contact"
-          style={{
-            display: 'block',
-            textAlign: 'center',
-            padding: '1rem',
-            background: 'linear-gradient(45deg, #feca57, #ff6b6b)',
-            borderRadius: '12px',
-            textDecoration: 'none',
-            color: '#1a1a2e',
-            fontWeight: 'bold',
-            fontSize: '1.1rem',
-            marginBottom: '2rem',
-            boxShadow: '0 4px 20px rgba(254,202,87,0.3)'
-          }}
-        >
-          📬 Contact Me
-        </a>
-
-        {/* Footer */}
-        <p style={{ textAlign: 'center', color: '#666', fontSize: '0.85rem' }}>
-          © 2026 ChochKlah. All rights reserved.
-        </p>
-
-        <style>{`
-          @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-          }
-          @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-          }
-        `}</style>
       </div>
     </main>
   )

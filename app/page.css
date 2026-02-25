@@ -1,0 +1,160 @@
+* { box-sizing: border-box; }
+
+.hero-main {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a0e2e 0%, #0d1a4a 40%, #0f2460 100%);
+  color: white;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+}
+
+/* ── Desktop layout ── */
+.hero-layout {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-image-wrap {
+  flex: 0 0 auto;
+  width: clamp(260px, 38vw, 460px);
+  display: flex;
+  align-items: flex-end;
+  align-self: flex-end;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(-20px 0 60px rgba(30,80,180,0.6));
+}
+
+.hero-content {
+  flex: 1 1 auto;
+  padding: 3rem 2rem 3.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.hero-title {
+  font-size: clamp(2.4rem, 5.5vw, 4.5rem);
+  font-weight: 900;
+  margin: 0;
+  line-height: 1.1;
+  text-shadow: 0 2px 30px rgba(255,255,255,0.15);
+  letter-spacing: -0.02em;
+}
+
+.hero-role {
+  font-size: clamp(0.95rem, 2vw, 1.3rem);
+  font-weight: 700;
+  margin: 0;
+  color: #a8c4ff;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.hero-desc {
+  font-size: clamp(0.85rem, 1.4vw, 1rem);
+  color: rgba(200,215,255,0.72);
+  line-height: 1.75;
+  max-width: 380px;
+  margin: 0;
+}
+
+.hero-links {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.25rem;
+}
+
+.icon-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: white;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.icon-btn:hover {
+  transform: scale(1.15);
+}
+
+.hero-footer {
+  color: #3d4a6e;
+  font-size: 0.78rem;
+  margin: 0.5rem 0 0;
+}
+
+/* ── Mobile layout (≤ 640px) ── */
+@media (max-width: 640px) {
+  .hero-main {
+    align-items: stretch;
+    overflow-y: auto;
+  }
+
+  .hero-layout {
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .hero-content {
+    order: 1;
+    padding: 2.5rem 1.5rem 1rem;
+    width: 100%;
+  }
+
+  .hero-image-wrap {
+    order: 2;
+    width: min(320px, 85vw);
+    align-self: center;
+  }
+
+  .hero-image {
+    filter: drop-shadow(0 -20px 40px rgba(30,80,180,0.5));
+  }
+
+  .hero-title {
+    font-size: 2.6rem;
+  }
+
+  .icon-btn {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+/* ── Tablet layout (641px – 900px) ── */
+@media (min-width: 641px) and (max-width: 900px) {
+  .hero-image-wrap {
+    width: clamp(200px, 32vw, 320px);
+  }
+
+  .hero-content {
+    padding: 2rem 1.5rem 3rem 0.75rem;
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.7; }
+}
