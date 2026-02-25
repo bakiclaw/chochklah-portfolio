@@ -87,7 +87,7 @@ export default function Home() {
         <div style={{
           width: '100vw',
           marginLeft: 'calc(-50vw + 50%)',
-          height: '180px',
+          height: '340px',
           overflow: 'hidden',
           marginBottom: '60px',
           boxShadow: '0 10px 40px rgba(0,0,0,0.5)'
