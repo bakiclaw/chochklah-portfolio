@@ -1,77 +1,159 @@
-import type { Metadata } from 'next'
+'use client'
 
-export const metadata: Metadata = {
-  title: 'ChochKlah | Indie Games & Pixel Art',
-  description: 'Your destination for the best Pixel Art Indie Games - YouTube, Twitch & more',
-}
+import { useState, useEffect } from 'react'
+
+const slides = [
+  {
+    title: "🎮 Pixel Art Indie Games",
+    subtitle: "Your destination for the best indie games!",
+    bg: "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)"
+  },
+  {
+    title: "🏆 Game Reviews",
+    subtitle: "Honest reviews & recommendations",
+    bg: "linear-gradient(135deg, #0f3460 0%, #1a1a2e 50%, #16213e 100%)"
+  },
+  {
+    title: "🎬 Let's Plays",
+    subtitle: "Join the adventure!",
+    bg: "linear-gradient(135deg, #16213e 0%, #0f3460 50%, #1a1a2e 100%)"
+  }
+]
 
 export default function Home() {
-  const links = [
-    { name: 'YouTube', url: 'https://www.youtube.com/@Chochklah', icon: '🎬', color: '#FF0000' },
-    { name: 'Twitch', url: 'https://www.twitch.tv/chochklah', icon: '🎮', color: '#9146FF' },
-    { name: 'X (Twitter)', url: 'https://x.com/ChochKlah', icon: '𝕏', color: '#000000' },
-    { name: 'Instagram', url: 'https://www.instagram.com/chochklah/', icon: '📸', color: '#E4405F' },
-  ]
+  const [currentSlide, setCurrentSlide] = useState(0)
 
-  const videos = [
-    { title: 'Top 25 BEST Pixel Art Indie Games 2026', url: 'https://www.youtube.com/watch?v=0cXREgdpg9Y' },
-    { title: 'Best Looking Pixel Art Games 2025', url: 'https://www.youtube.com/watch?v=gMVDL3DumwE' },
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length)
+    }, 4000)
+    return () => clearInterval(timer)
+  }, [])
+
+  const links = [
+    { name: 'YouTube', url: 'https://www.youtube.com/@Chochklah', icon: '▶️', color: '#FF0000' },
+    { name: 'Twitch', url: 'https://www.twitch.tv/chochklah', icon: '🎮', color: '#9146FF' },
+    { name: 'X', url: 'https://x.com/ChochKlah', icon: '𝕏', color: '#1DA1F2' },
+    { name: 'Instagram', url: 'https://www.instagram.com/chochklah/', icon: '📸', color: '#E4405F' },
   ]
 
   return (
     <main style={{
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
+      background: slides[currentSlide].bg,
       color: 'white',
-      fontFamily: 'system-ui, sans-serif',
-      padding: '2rem 1rem'
+      fontFamily: "'Courier New', monospace",
+      transition: 'background 1s ease',
+      overflow: 'hidden'
     }}>
-      <div style={{ maxWidth: '500px', margin: '0 auto', textAlign: 'center' }}>
-        
-        {/* Profile */}
-        <div style={{ marginBottom: '2rem' }}>
-          <div style={{
-            width: '120px',
-            height: '120px',
+      {/* Animated Background Stars */}
+      <div style={{ position: 'fixed', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
+        {[...Array(50)].map((_, i) => (
+          <div key={i} style={{
+            position: 'absolute',
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            width: `${Math.random() * 3 + 1}px`,
+            height: `${Math.random() * 3 + 1}px`,
+            background: 'white',
             borderRadius: '50%',
-            background: 'linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3)',
-            margin: '0 auto 1rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '3rem',
-            boxShadow: '0 0 30px rgba(255,255,255,0.2)'
+            animation: `twinkle ${Math.random() * 3 + 2}s infinite`
+          }} />
+        ))}
+      </div>
+
+      {/* Slide Indicator */}
+      <div style={{ position: 'fixed', bottom: '20px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '8px', zIndex: 10 }}>
+        {slides.map((_, i) => (
+          <div key={i} style={{
+            width: i === currentSlide ? '24px' : '8px',
+            height: '8px',
+            borderRadius: '4px',
+            background: i === currentSlide ? '#feca57' : 'rgba(255,255,255,0.3)',
+            transition: 'all 0.3s ease'
+          }} />
+        ))}
+      </div>
+
+      <div style={{ 
+        maxWidth: '600px', 
+        margin: '0 auto', 
+        padding: '2rem 1rem',
+        position: 'relative',
+        zIndex: 1
+      }}>
+        
+        {/* Banner - Full Width */}
+        <div style={{
+          width: '100vw',
+          marginLeft: 'calc(-50vw + 50%)',
+          height: '180px',
+          overflow: 'hidden',
+          marginBottom: '60px',
+          boxShadow: '0 10px 40px rgba(0,0,0,0.5)'
+        }}>
+          <img 
+            src="/banner.jpg" 
+            alt="ChochKlah"
+            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
+          />
+        </div>
+
+        {/* Profile Picture */}
+        <div style={{
+          width: '100px',
+          height: '100px',
+          borderRadius: '50%',
+          background: 'linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3)',
+          margin: '-50px auto 1rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '2.5rem',
+          boxShadow: '0 0 30px rgba(255,255,255,0.3)',
+          position: 'relative',
+          zIndex: 1,
+          border: '4px solid #1a1a2e'
+        }}>
+          🎮
+        </div>
+
+        {/* Animated Title */}
+        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+          <h1 style={{ 
+            fontSize: '2.5rem', 
+            marginBottom: '0.5rem',
+            textShadow: '0 0 20px rgba(254,202,87,0.5)',
+            animation: 'pulse 2s infinite'
           }}>
-            🎮
-          </div>
-          <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>ChochKlah</h1>
-          <p style={{ color: '#a0a0a0', fontSize: '1rem' }}>
-            🎨 Pixel Art Indie Games
+            {slides[currentSlide].title}
+          </h1>
+          <p style={{ color: '#a0a0a0', fontSize: '1.1rem' }}>
+            {slides[currentSlide].subtitle}
           </p>
         </div>
 
         {/* Links */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem', marginBottom: '2rem' }}>
           {links.map((link) => (
             <a
               key={link.name}
               href={link.url}
               target="_blank"
-              rel="noopener noreferrer"
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '0.75rem',
-                padding: '1rem',
-                background: 'rgba(255,255,255,0.1)',
-                borderRadius: '12px',
+                gap: '0.5rem',
+                padding: '1.25rem',
+                background: `${link.color}22`,
+                borderRadius: '16px',
+                border: `2px solid ${link.color}44`,
                 textDecoration: 'none',
                 color: 'white',
-                fontWeight: '600',
-                fontSize: '1.1rem',
-                border: '1px solid rgba(255,255,255,0.1)',
-                transition: 'transform 0.2s, background 0.2s'
+                fontWeight: 'bold',
+                fontSize: '1rem',
+                transition: 'all 0.3s ease'
               }}
             >
               <span style={{ fontSize: '1.5rem' }}>{link.icon}</span>
@@ -80,52 +162,41 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Featured Videos */}
-        <div style={{
-          background: 'rgba(255,255,255,0.05)',
-          borderRadius: '16px',
-          padding: '1.5rem',
-          marginBottom: '2rem'
-        }}>
-          <h2 style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>🔥 Featured Videos</h2>
-          {videos.map((video, i) => (
-            <a
-              key={i}
-              href={video.url}
-              target="_blank"
-              style={{
-                display: 'block',
-                padding: '0.75rem',
-                background: 'rgba(255,255,255,0.05)',
-                borderRadius: '8px',
-                marginBottom: '0.5rem',
-                color: 'white',
-                textDecoration: 'none',
-                fontSize: '0.9rem'
-              }}
-            >
-              ▶ {video.title}
-            </a>
-          ))}
-        </div>
-
-        {/* About */}
-        <div style={{
-          background: 'rgba(255,255,255,0.05)',
-          borderRadius: '16px',
-          padding: '1.5rem'
-        }}>
-          <h2 style={{ fontSize: '1.25rem', marginBottom: '0.75rem' }}>👤 About</h2>
-          <p style={{ color: '#a0a0a0', lineHeight: '1.6', fontSize: '0.95rem' }}>
-            Your destination for the best Pixel Art Indie Games! 
-            Reviews, showcases, and recommendations for indie game lovers.
-          </p>
-        </div>
+        {/* CTA Button */}
+        <a
+          href="/contact"
+          style={{
+            display: 'block',
+            textAlign: 'center',
+            padding: '1rem',
+            background: 'linear-gradient(45deg, #feca57, #ff6b6b)',
+            borderRadius: '12px',
+            textDecoration: 'none',
+            color: '#1a1a2e',
+            fontWeight: 'bold',
+            fontSize: '1.1rem',
+            marginBottom: '2rem',
+            boxShadow: '0 4px 20px rgba(254,202,87,0.3)'
+          }}
+        >
+          📬 Contact Me
+        </a>
 
         {/* Footer */}
-        <footer style={{ marginTop: '2rem', color: '#666', fontSize: '0.8rem' }}>
-          <p>© 2026 ChochKlah. All rights reserved.</p>
-        </footer>
+        <p style={{ textAlign: 'center', color: '#666', fontSize: '0.85rem' }}>
+          © 2026 ChochKlah. All rights reserved.
+        </p>
+
+        <style>{`
+          @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+          }
+          @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+          }
+        `}</style>
       </div>
     </main>
   )
