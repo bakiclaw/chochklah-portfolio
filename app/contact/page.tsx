@@ -39,7 +39,7 @@ export default function Contact() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2rem' }}>
           
           <a
-            href="mailto:chochklah@gmail.com"
+            href="mailto:hello@chochklah.com"
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -55,7 +55,7 @@ export default function Contact() {
             <span style={{ fontSize: '2rem' }}>📧</span>
             <div>
               <div style={{ fontWeight: 'bold' }}>Email</div>
-              <div style={{ color: '#888', fontSize: '0.9rem' }}>chochklah@gmail.com</div>
+              <div style={{ color: '#888', fontSize: '0.9rem' }}>hello@chochklah.com</div>
             </div>
           </a>
 
