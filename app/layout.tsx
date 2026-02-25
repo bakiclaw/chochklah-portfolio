@@ -1,6 +1,6 @@
 export const metadata = {
   title: 'ChochKlah | Indie Games & Pixel Art',
-  description: 'Your destination for the best Pixel Art Indie Games - YouTube, Twitch & more',
+  description: 'Your destination for the best Pixel Art Indie Games - YouTube & more',
 }
 
 export default function RootLayout({

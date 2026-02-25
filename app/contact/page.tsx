@@ -82,28 +82,6 @@ export default function Contact() {
           </a>
 
           <a
-            href="https://www.twitch.tv/chochklah"
-            target="_blank"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '1rem',
-              padding: '1.5rem',
-              background: 'rgba(145,70,255,0.1)',
-              borderRadius: '16px',
-              textDecoration: 'none',
-              color: 'white',
-              border: '1px solid rgba(145,70,255,0.2)'
-            }}
-          >
-            <span style={{ fontSize: '2rem' }}>🎮</span>
-            <div>
-              <div style={{ fontWeight: 'bold' }}>Twitch</div>
-              <div style={{ color: '#888', fontSize: '0.9rem' }}>twitch.tv/chochklah</div>
-            </div>
-          </a>
-
-          <a
             href="https://x.com/ChochKlah"
             target="_blank"
             style={{

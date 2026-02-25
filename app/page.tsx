@@ -32,7 +32,6 @@ export default function Home() {
 
   const links = [
     { name: 'YouTube', url: 'https://www.youtube.com/@Chochklah', icon: '▶️', color: '#FF0000' },
-    { name: 'Twitch', url: 'https://www.twitch.tv/chochklah', icon: '🎮', color: '#9146FF' },
     { name: 'X', url: 'https://x.com/ChochKlah', icon: '𝕏', color: '#1DA1F2' },
     { name: 'Instagram', url: 'https://www.instagram.com/chochklah/', icon: '📸', color: '#E4405F' },
   ]
@@ -97,25 +96,6 @@ export default function Home() {
             alt="ChochKlah"
             style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
           />
-        </div>
-
-        {/* Profile Picture */}
-        <div style={{
-          width: '100px',
-          height: '100px',
-          borderRadius: '50%',
-          background: 'linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3)',
-          margin: '-50px auto 1rem',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: '2.5rem',
-          boxShadow: '0 0 30px rgba(255,255,255,0.3)',
-          position: 'relative',
-          zIndex: 1,
-          border: '4px solid #1a1a2e'
-        }}>
-          🎮
         </div>
 
         {/* Animated Title */}
