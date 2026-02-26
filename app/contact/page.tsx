@@ -1,66 +1,78 @@
 'use client'
 
+import { useState, useEffect } from 'react'
+import '../page.css'
+
 export default function Contact() {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   return (
-    <main style={{
-      minHeight: '100vh',
-      background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
-      color: 'white',
-      fontFamily: "'Courier New', monospace",
-      padding: '2rem 1rem'
-    }}>
-      <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-        
-        {/* Back Button */}
-        <a
-          href="/"
-          style={{
-            display: 'inline-block',
-            padding: '0.5rem 1rem',
-            background: 'rgba(255,255,255,0.1)',
-            borderRadius: '8px',
-            textDecoration: 'none',
-            color: 'white',
-            marginBottom: '2rem'
-          }}
-        >
-          ← Back
-        </a>
+    <main className="hero-main">
+      {/* Animated Background Stars */}
+      {mounted && (
+        <div style={{ position: 'fixed', inset: 0, overflow: 'hidden', pointerEvents: 'none', zIndex: 0 }}>
+          {[...Array(60)].map((_, i) => (
+            <div key={i} style={{
+              position: 'absolute',
+              left: `${(i * 37 + 13) % 100}%`,
+              top: `${(i * 53 + 7) % 100}%`,
+              width: `${(i % 3) + 1}px`,
+              height: `${(i % 3) + 1}px`,
+              background: 'white',
+              borderRadius: '50%',
+              opacity: 0.4,
+              animation: `twinkle ${2 + (i % 3)}s infinite`,
+              animationDelay: `${(i * 0.15) % 3}s`
+            }} />
+          ))}
+        </div>
+      )}
 
-        <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem', textAlign: 'center' }}>
-          📬 Get In Touch
-        </h1>
-        
-        <p style={{ color: '#a0a0a0', textAlign: 'center', marginBottom: '3rem' }}>
-          For business inquiries, collaborations, or just to say hi!
-        </p>
+      {/* Hero Layout */}
+      <div className="hero-layout">
 
-        {/* Email Only */}
-        <a
-          href="mailto:hello@chochklah.com"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '1rem',
-            padding: '2rem',
-            background: 'linear-gradient(135deg, #ff6b6b, #feca57)',
-            borderRadius: '16px',
-            textDecoration: 'none',
-            color: '#1a1a2e',
-            fontWeight: 'bold',
-            fontSize: '1.3rem',
-            boxShadow: '0 4px 30px rgba(255,107,107,0.3)'
-          }}
-        >
-          <span style={{ fontSize: '2rem' }}>📧</span>
-          hello@chochklah.com
-        </a>
+        {/* Left: Character Image */}
+        <div className="hero-image-wrap">
+          <img
+            src="/Choch.png"
+            alt="Choch"
+            className="hero-image"
+          />
+        </div>
 
-        <p style={{ textAlign: 'center', color: '#666', marginTop: '3rem', fontSize: '0.9rem' }}>
-          © 2026 ChochKlah. All rights reserved.
-        </p>
+        {/* Right: Contact Content */}
+        <div className="hero-content">
+          <h1 className="hero-title">Get In Touch</h1>
 
+          <p className="hero-role">Business &amp; Collaborations</p>
+
+          <div className="hero-about">
+            <p>
+              Whether you&apos;re a developer looking to get your game covered, a brand
+              interested in a partnership, or just want to say hi — I&apos;d love to hear from you!
+            </p>
+            <p>
+              For sponsorships, game reviews, and collaborations, reach out via email
+              and I&apos;ll get back to you as soon as I can.
+            </p>
+          </div>
+
+          {/* Email CTA */}
+          <a href="mailto:hello@chochklah.com" className="email-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+              <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+            hello@chochklah.com
+          </a>
+
+          <a href="/" className="contact-btn">← Back to Home</a>
+
+          <p className="hero-footer">© 2026 ChochKlah. All rights reserved.</p>
+        </div>
       </div>
     </main>
   )
